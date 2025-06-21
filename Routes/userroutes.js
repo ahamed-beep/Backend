@@ -1,6 +1,7 @@
 import express from 'express';
 import { editshowdata, forgotpassword, goooglesignlogincontroller, logincontroller, resetpassword, showuserdata, signincontroller,  updateUserStatus } from '../Controller/usercontroller.js';
-import { getsinglesubmissions, getsubmissionsdata, submissionfromdata, updatesubmission } from '../Controller/submissioncontroller.js';
+import {  getsinglesubmissions, getsubmissionsdata, submissionfromdata, updatesubmission } from '../Controller/submissioncontroller.js';
+import { contactsubmitcontroller, getcontactdatacontroller } from '../Controller/contactcontroller.js';
 const userroutes = express.Router();
 userroutes.route('/sign').post(signincontroller);
 userroutes.route('/login').post(logincontroller);
@@ -14,6 +15,12 @@ userroutes.route('/sub').post(submissionfromdata);
 userroutes.route('/getsub').get(getsubmissionsdata); 
 userroutes.route('/singlesub/:id').get(getsinglesubmissions);
 userroutes.route('/updatesub/:id').put(updatesubmission);
+userroutes.route('/contact').post(contactsubmitcontroller);
+userroutes.route('/contact').get(getcontactdatacontroller);
+
+
+
+
 
 
 

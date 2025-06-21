@@ -85,6 +85,14 @@ const submissionmodel = new mongoose.Schema({
     admindescription:{
          type:String,
         default:"null"
+    },
+    featuredphotograph:{
+        type:String,
+           default:"false"
+    },
+     featuredletter:{
+        type:String,
+           default:"false"
     }
 }, { timestamps: true });
 

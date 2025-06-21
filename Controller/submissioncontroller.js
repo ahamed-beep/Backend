@@ -25,7 +25,10 @@ export const submissionfromdata = async (req, res) => {
       category,
       title,
         status,
-        admindescription
+        admindescription,
+           featuredphotograph,
+            featuredletter
+
     } = req.body;
 
     const existing = await submissions.findOne({
@@ -69,7 +72,9 @@ export const submissionfromdata = async (req, res) => {
       category,
       title,
       status,
-      admindescription
+      admindescription,
+      featuredphotograph,
+      featuredletter
     });
 
  res.status(200).json({ message: "Submission submitted successfully", createsubmissions });
@@ -136,3 +141,4 @@ export const updatesubmission = async (req, res) => {
     res.status(500).json({ message: "Update failed", error: error.message });
   }
 };
+
