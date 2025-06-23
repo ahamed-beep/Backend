@@ -18,15 +18,17 @@ export const contactsubmitcontroller = async (req, res) => {
 };
 
 
-export const getcontactdatacontroller = async(req , res)=>{
-    try {
-        const getsubmission = await contact.find();
-        if(!getsubmission){
-            res.status(400).json({message :"data not found"})
-        }
-        res.status(200).json({message :"data get successfully"})
-    } catch (error) {
-    res.status(500).json({ message: "Internal error" });
-        
+export const getcontactdatacontroller = async (req, res) => {
+  try {
+    const getsubmission = await contact.find();
+    if (!getsubmission || getsubmission.length === 0) {
+      return res.status(404).json({ message: "data not found", getsubmission: [] });
     }
-}
+    res.status(200).json({
+      message: "data get successfully",
+      getsubmission
+    });
+  } catch (error) {
+    res.status(500).json({ message: "Internal error" });
+  }
+};

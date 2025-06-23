@@ -142,3 +142,29 @@ export const updatesubmission = async (req, res) => {
   }
 };
 
+export const getLetterSubmissions = async (req, res) => {
+  try {
+    const data = await submissions.find({ attachment: "Letter" });
+    if (!data || data.length === 0) {
+      return res.status(404).json({ message: "No Letter submissions found" });
+    }
+    res.status(200).json({ message: "Letter submissions fetched", data });
+  } catch (error) {
+    console.error("Letter Submissions Error:", error);
+    res.status(500).json({ message: "Internal error", error: error.message });
+  }
+};
+
+export const getPhotographSubmissions = async (req, res) => {
+  try {
+    const data = await submissions.find({ attachment: "Photograph" });
+    if (!data || data.length === 0) {
+      return res.status(404).json({ message: "No Photograph submissions found" });
+    }
+    res.status(200).json({ message: "Photograph submissions fetched", data });
+  } catch (error) {
+    console.error("Photograph Submissions Error:", error);
+    res.status(500).json({ message: "Internal error", error: error.message });
+  }
+};
+

@@ -1,7 +1,8 @@
 import express from 'express';
 import { editshowdata, forgotpassword, goooglesignlogincontroller, logincontroller, resetpassword, showuserdata, signincontroller,  updateUserStatus } from '../Controller/usercontroller.js';
-import {  getsinglesubmissions, getsubmissionsdata, submissionfromdata, updatesubmission } from '../Controller/submissioncontroller.js';
+import {  getLetterSubmissions, getPhotographSubmissions, getsinglesubmissions, getsubmissionsdata, submissionfromdata, updatesubmission } from '../Controller/submissioncontroller.js';
 import { contactsubmitcontroller, getcontactdatacontroller } from '../Controller/contactcontroller.js';
+import { deleteProductById, getAllProducts, getFeaturedProductById, getFeaturedProducts, getProductById, getProductByIdForRecommendation, productaddcontroller, updateProductById } from '../Controller/productcontroller.js';
 const userroutes = express.Router();
 userroutes.route('/sign').post(signincontroller);
 userroutes.route('/login').post(logincontroller);
@@ -16,15 +17,17 @@ userroutes.route('/getsub').get(getsubmissionsdata);
 userroutes.route('/singlesub/:id').get(getsinglesubmissions);
 userroutes.route('/updatesub/:id').put(updatesubmission);
 userroutes.route('/contact').post(contactsubmitcontroller);
-userroutes.route('/contact').get(getcontactdatacontroller);
-
-
-
-
-
-
-
-
+userroutes.route('/getcontact').get(getcontactdatacontroller);
+userroutes.route('/postproduct').post(productaddcontroller);
+userroutes.route('/getproduct').get(getAllProducts);
+userroutes.route('/singleproduct/:id').get(getProductById);
+userroutes.route('/updateproduct/:id').put(updateProductById);
+userroutes.route('/products/delete/:id').delete(deleteProductById);
+userroutes.route('/featured').get(getFeaturedProducts);
+userroutes.route('/getfeatured/:id').get(getFeaturedProductById);
+userroutes.route('/recommendation/:id').get(getProductByIdForRecommendation);
+userroutes.route('/getattachmentletters').get(getLetterSubmissions);
+userroutes.route('/getattachmentphotographs').get(getPhotographSubmissions);
 
 
 
