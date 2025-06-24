@@ -27,7 +27,8 @@ export const submissionfromdata = async (req, res) => {
         status,
         admindescription,
            featuredphotograph,
-            featuredletter
+            featuredletter,
+               language
 
     } = req.body;
 
@@ -74,7 +75,8 @@ export const submissionfromdata = async (req, res) => {
       status,
       admindescription,
       featuredphotograph,
-      featuredletter
+      featuredletter,
+      language
     });
 
  res.status(200).json({ message: "Submission submitted successfully", createsubmissions });

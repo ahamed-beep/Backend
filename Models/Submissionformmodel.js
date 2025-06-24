@@ -93,6 +93,10 @@ const submissionmodel = new mongoose.Schema({
      featuredletter:{
         type:String,
            default:"false"
+    },
+    language:{
+        type:String,
+        required:true
     }
 }, { timestamps: true });
 
