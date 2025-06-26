@@ -170,3 +170,174 @@ export const getPhotographSubmissions = async (req, res) => {
   }
 };
 
+
+export const getApprovedLetters = async (req, res) => {
+    try {
+  const approvedLetters = await submissions.find({
+  attachment: "Letter",
+  status: { $regex: new RegExp('^approved$', 'i') }  // case-insensitive match
+}).select('-__v -updatedAt');
+
+        
+        if (!approvedLetters || approvedLetters.length === 0) {
+            return res.status(404).json({
+                success: false,
+                message: "No approved Letter submissions found"
+            });
+        }
+        console.log("Approved Letters ===>", approvedLetters.map(l => ({
+  id: l._id,
+  title: l.title,
+  story: l.story
+})));
+        res.status(200).json({
+            success: true,
+            count: approvedLetters.length,
+            data: approvedLetters
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Error fetching approved Letter submissions",
+            error: error.message
+        });
+    }
+};
+
+export const getApprovedPhotographs = async (req, res) => {
+    try {
+    const approvedPhotographs = await submissions.find({
+            attachment: "Photograph",  
+            status: "Approved"  
+        }).select('-__v -updatedAt'); 
+        
+        if (!approvedPhotographs || approvedPhotographs.length === 0) {
+            return res.status(404).json({
+                success: false,
+                message: "No approved Photograph submissions found"
+            });
+        }
+        
+        res.status(200).json({
+            success: true,
+            count: approvedPhotographs.length,
+            data: approvedPhotographs
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Error fetching approved Photograph submissions",
+            error: error.message
+        });
+    }
+};
+
+
+export const getApprovedSubmissionById = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const submission = await submissions.findById(id);
+
+        if (!submission) {
+            return res.status(404).json({
+                success: false,
+                message: "Submission not found"
+            });
+        }
+
+        const { __v, updatedAt, ...submissionData } = submission._doc;
+
+        res.status(200).json({
+            success: true,
+            data: submissionData
+        });
+
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Error fetching submission details",
+            error: error.message
+        });
+    }
+};
+
+
+export const adminCreateSubmission = async (req, res) => {
+  try {
+    const {
+      name,
+      location,
+      phone,
+      phone2,
+      email,
+      socialmedia,
+      guadianowner,
+      attachment,
+      otherspecify,
+      image, 
+      dateimage,
+      placeimage,
+      photographcaptain,
+      story,
+      narrative,
+      imageadded,
+      imagebefore,
+      termsandcondition,
+      category,
+      title,
+      status,
+      admindescription,
+      featuredphotograph,
+      featuredletter,
+      language
+    } = req.body;
+
+    let cloudinaryResponse = null;
+    if (image) {
+      cloudinaryResponse = await cloudinary.uploader.upload(image, {
+        folder: "submissions"
+      });
+    }
+
+    const createSubmission = await submissions.create({
+      name,
+      location,
+      phone,
+      phone2,
+      email,
+      socialmedia,
+      guadianowner,
+      attachment,
+      otherspecify,
+      image: cloudinaryResponse?.secure_url || "",
+      dateimage,
+      placeimage,
+      photographcaptain,
+      story,
+      narrative,
+      imageadded,
+      imagebefore,
+      termsandcondition,
+      category,
+      title,
+      status,
+      admindescription,
+      featuredphotograph,
+      featuredletter,
+      language
+    });
+
+    res.status(200).json({
+      message: "Submission added successfully by admin.",
+      createSubmission
+    });
+
+  } catch (error) {
+    console.error("Admin Submission Error:", error);
+    res.status(500).json({
+      message: "Failed to add submission",
+      error: error.message
+    });
+  }
+};
