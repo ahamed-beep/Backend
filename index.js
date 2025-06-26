@@ -13,12 +13,13 @@ const port = process.env.PORT || 5000;
 
 app.use(cors({
   origin: [
-    'https://mu-project.netlify.app',
     'http://localhost:5173',
-    'http://localhost:5174'  
+    'http://localhost:5174',
+    'https://latest-khat-khazana-heritage.netlify.app'  // ✅ new domain
   ],
   credentials: true
 }));
+
 
 
 
