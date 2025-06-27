@@ -15,7 +15,7 @@ app.use(cors({
   origin: [
     'http://localhost:5173',
     'http://localhost:5174',
-    'https://khat-khazana-heritage-latest.netlify.app' 
+    'https://changes-khat-khazana-heritage.netlify.app/'  // ✅ new domain
   ],
   credentials: true
 }));
