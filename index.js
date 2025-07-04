@@ -15,7 +15,7 @@ app.use(cors({
   origin: [
     'http://localhost:5173',
     'http://localhost:5174',
-    'https://existing.netlify.app'  // ✅ new domain
+    'https://new-heritage.netlify.app'  // ✅ new domain
   ],
   credentials: true
 }));
