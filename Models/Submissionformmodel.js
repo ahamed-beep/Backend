@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const submissionmodel = new mongoose.Schema({
     title:{
         type:String,
-        reqiored:true
+        required:true
     },
     name: {
         type: String,

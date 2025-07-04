@@ -341,3 +341,32 @@ export const adminCreateSubmission = async (req, res) => {
     });
   }
 };
+
+export const deleteSubmission = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const deleted = await submissions.findByIdAndDelete(id);
+
+    if (!deleted) {
+      return res.status(404).json({
+        success: false,
+        message: "Submission not found",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Submission deleted successfully",
+      deleted,
+    });
+  } catch (error) {
+    console.error("Delete Error:", error);
+    res.status(500).json({
+      success: false,
+      message: "Failed to delete submission",
+      error: error.message,
+    });
+  }
+};
+

@@ -1,6 +1,6 @@
 import express from 'express';
 import { editshowdata, forgotpassword, goooglesignlogincontroller, logincontroller, resetpassword, showuserdata, signincontroller,  updateUserStatus } from '../Controller/usercontroller.js';
-import {  adminCreateSubmission, getApprovedLetters, getApprovedPhotographs, getApprovedSubmissionById, getLetterSubmissions, getPhotographSubmissions, getsinglesubmissions, getsubmissionsdata, submissionfromdata, updatesubmission } from '../Controller/submissioncontroller.js';
+import {  adminCreateSubmission, deleteSubmission, getApprovedLetters, getApprovedPhotographs, getApprovedSubmissionById, getLetterSubmissions, getPhotographSubmissions, getsinglesubmissions, getsubmissionsdata, submissionfromdata, updatesubmission } from '../Controller/submissioncontroller.js';
 import { contactsubmitcontroller, getcontactdatacontroller } from '../Controller/contactcontroller.js';
 import { deleteProductById, getAllProducts, getFeaturedProductById, getFeaturedProducts, getProductById, getProductByIdForRecommendation, productaddcontroller, updateProductById } from '../Controller/productcontroller.js';
 const userroutes = express.Router();
@@ -32,6 +32,8 @@ userroutes.route('/getapprovedletters').get(getApprovedLetters);
 userroutes.route('/getapprovedphotographs').get(getApprovedPhotographs);
 userroutes.route('/getapprovedsubmissions/:id').get(getApprovedSubmissionById);
 userroutes.route('/submissionaddcontroller').post(adminCreateSubmission);
+userroutes.route('/deletesubmission/:id').delete(deleteSubmission);
+
 
 
 
