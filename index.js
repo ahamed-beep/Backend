@@ -15,7 +15,7 @@ app.use(cors({
   origin: [
     'http://localhost:5173',
     'http://localhost:5174',
-    'https://new-things-added.netlify.app'  // ✅ new domain
+    'https://hertiage.netlify.app'  // ✅ new domain
   ],
   credentials: true
 }));
